@@ -6,7 +6,7 @@
 /*   By: abarahho <abarahho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:57:30 by abarahho          #+#    #+#             */
-/*   Updated: 2025/05/29 18:24:41 by abarahho         ###   ########.fr       */
+/*   Updated: 2025/05/30 16:41:09 by abarahho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ Intern::~Intern()
 	std::cout << "Intern destructor"<< std::endl;
 }
 
-Intern const	&Intern::operator=(Intern const &src)
+Intern			&Intern::operator=(Intern const &src)
 {
+	std::cout << "Intern assignment operator called" << std::endl;
 	if (this != &src)
 		return (*this);
 	return (*this);
@@ -55,14 +56,14 @@ static AForm	*makeShrubbery(const std::string target)
 
 AForm			*Intern::makeForm(const std::string form, const std::string target)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	AForm	*(*forms[])(const std::string target) = {&makePresident, &makeRobot, &makeShrubbery};
-	std::string formsName[] = {"PresidentialPardonForm", "RobotomyRequestForm", "ShrubberyCreationForm"};
-	while (i < 4)
+	std::string formsName[] = {"presidential form", "robotomy form", "shrubbery form"};
+	while (i < 3)
 	{
-		if (form == formsName[i])
+		if (form == formsName[i]) 
 		{
 			std::cout << "Intern creates " << formsName[i] << std::endl;
 			return (forms[i](target));

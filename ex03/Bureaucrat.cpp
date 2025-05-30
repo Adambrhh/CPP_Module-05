@@ -6,7 +6,7 @@
 /*   By: abarahho <abarahho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 11:41:14 by abarahho          #+#    #+#             */
-/*   Updated: 2025/05/29 14:26:32 by abarahho         ###   ########.fr       */
+/*   Updated: 2025/05/30 13:56:08 by abarahho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ Bureaucrat::Bureaucrat(Bureaucrat const &src)
 
 Bureaucrat::~Bureaucrat()
 {
-	std::cout << "Bureaucrat destructor " << this->getName() << std::endl;	
+	std::cout << "Bureaucrat destructor for : " << this->getName() << std::endl;	
 }
 
 Bureaucrat const	&Bureaucrat::operator=(const Bureaucrat &src)

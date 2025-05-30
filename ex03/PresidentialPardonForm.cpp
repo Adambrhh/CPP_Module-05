@@ -6,7 +6,7 @@
 /*   By: abarahho <abarahho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:16:05 by abarahho          #+#    #+#             */
-/*   Updated: 2025/05/29 17:53:47 by abarahho         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:21:49 by abarahho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,33 @@
 
 PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardonForm", "default")
 {
-	this->setSignGrade(145);
-	this->setExecGrade(137);
-	std::cout << "PresidentialPardonForm default constructor " << this->getTarget() << std::endl;
+	this->setSignGrade(25);
+	this->setExecGrade(5);
+	std::cout << "PresidentialPardonForm default constructor" << std::endl;
 }
 
 PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &src) : AForm(src)
 {
-	std::cout << "PresidentialPardonForm destructor for: " << this->getTarget() << std::endl;
+	std::cout << "PresidentialPardonForm copy constructor for: " << this->getTarget() << std::endl;
 }
 
 PresidentialPardonForm::PresidentialPardonForm(std::string const &target) : AForm("PresidentialPardonForm", target)
 {
-	this->setSignGrade(145);
-	this->setExecGrade(137);
+	this->setSignGrade(25);
+	this->setExecGrade(5);
 	std::cout << "PresidentialPardonForm constructor for target: " << target << std::endl;
+}
+
+PresidentialPardonForm const	&PresidentialPardonForm::operator=(PresidentialPardonForm const &src)
+{
+	if (this != &src)
+	{
+		this->setSignGrade(src.getSignGrade());
+		this->setExecGrade(src.getExecGrade());
+		this->setSigned(false);
+		this->setTarget(src.getTarget());
+	}
+	return (*this);
 }
 
 PresidentialPardonForm::~PresidentialPardonForm()

@@ -6,7 +6,7 @@
 /*   By: abarahho <abarahho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 15:39:05 by abarahho          #+#    #+#             */
-/*   Updated: 2025/05/29 17:53:23 by abarahho         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:21:19 by abarahho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", 
 {
 	this->setSignGrade(145);
 	this->setExecGrade(137);
-	std::cout << "ShrubberyCreationForm default constructor " << this->getTarget() << std::endl;
+	std::cout << "ShrubberyCreationForm default constructor" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &src) : AForm(src)
 {
-	std::cout << "ShrubberyCreationForm destructor for: " << this->getTarget() << std::endl;
+	std::cout << "ShrubberyCreationForm copy constructor for: " << this->getTarget() << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string const &target) : AForm("ShrubberyCreationForm", target)
@@ -32,11 +32,22 @@ ShrubberyCreationForm::ShrubberyCreationForm(std::string const &target) : AForm(
 	std::cout << "ShrubberyCreationForm constructor for target: " << target << std::endl;
 }
 
+ShrubberyCreationForm const	&ShrubberyCreationForm::operator=(ShrubberyCreationForm const &src)
+{
+	if (this != &src)
+	{
+		this->setSignGrade(src.getSignGrade());
+		this->setExecGrade(src.getExecGrade());
+		this->setSigned(false);
+		this->setTarget(src.getTarget());
+	}
+	return (*this);
+}
+
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {
 	std::cout << "ShrubberyCreationForm destructor " << this->getTarget() << std::endl;
 }
-
 
 void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {

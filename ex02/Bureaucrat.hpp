@@ -6,7 +6,7 @@
 /*   By: abarahho <abarahho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 11:41:12 by abarahho          #+#    #+#             */
-/*   Updated: 2025/05/28 16:28:02 by abarahho         ###   ########.fr       */
+/*   Updated: 2025/05/29 11:48:18 by abarahho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ class Bureaucrat
 		void				gradeUp();
 		void				gradeDown();
 		void				signForm(AForm &src);
+		void				executeForm(AForm const & form) const;
 		class GradeTooHighException: public std::exception
 		{
 			public:

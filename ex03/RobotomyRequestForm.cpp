@@ -6,7 +6,7 @@
 /*   By: abarahho <abarahho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:13:31 by abarahho          #+#    #+#             */
-/*   Updated: 2025/05/29 17:53:32 by abarahho         ###   ########.fr       */
+/*   Updated: 2025/05/30 14:30:19 by abarahho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,33 @@
 
 RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", "default")
 {
-	this->setSignGrade(145);
-	this->setExecGrade(137);
-	std::cout << "RobotomyRequestForm default constructor " << this->getTarget() << std::endl;
+	this->setSignGrade(72);
+	this->setExecGrade(45);
+	std::cout << "RobotomyRequestForm default constructor" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &src) : AForm(src)
 {
-	std::cout << "RobotomyRequestForm destructor for: " << this->getTarget() << std::endl;
+	std::cout << "RobotomyRequestForm copy constructor for: " << this->getTarget() << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(std::string const &target) : AForm("RobotomyRequestForm", target)
 {
-	this->setSignGrade(145);
-	this->setExecGrade(137);
+	this->setSignGrade(72);
+	this->setExecGrade(45);
 	std::cout << "RobotomyRequestForm constructor for target: " << target << std::endl;
+}
+
+RobotomyRequestForm const	&RobotomyRequestForm::operator=(RobotomyRequestForm const &src)
+{
+	if (this != &src)
+	{
+		this->setSignGrade(src.getSignGrade());
+		this->setExecGrade(src.getExecGrade());
+		this->setSigned(false);
+		this->setTarget(src.getTarget());
+	}
+	return (*this);
 }
 
 RobotomyRequestForm::~RobotomyRequestForm()
@@ -48,7 +60,7 @@ void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 	std::cout << "* DRILLING NOISES * Bzzzzz... Vrrrrrr... Drrrrrrr... *" << std::endl;
 	std::srand(std::time(NULL));
 	if (rand() % 2)
-		std::cout << this->getName() << " has been robotomized successfully!" << std::endl;
+		std::cout << this->getTarget() << " has been robotomized successfully!" << std::endl;
 	else
 		std::cout << "Robotomy failed for " << this->getTarget() << "." << std::endl;
 }

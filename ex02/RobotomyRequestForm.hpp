@@ -6,7 +6,7 @@
 /*   By: abarahho <abarahho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:13:24 by abarahho          #+#    #+#             */
-/*   Updated: 2025/05/28 16:32:58 by abarahho         ###   ########.fr       */
+/*   Updated: 2025/05/29 17:32:33 by abarahho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,13 @@ class Bureaucrat;
 
 class RobotomyRequestForm : public AForm
 {
-	private:
-		bool				_is_signed;
 	public:
 		RobotomyRequestForm();
+		RobotomyRequestForm(std::string const &target);
 		RobotomyRequestForm(RobotomyRequestForm const &src);
 		virtual	~RobotomyRequestForm(void);
 		RobotomyRequestForm const	&operator=(RobotomyRequestForm const &src);
-		std::string const	&getName() const;
-		bool const			&getSigned() const;
-		int const			&getSignGrade() const;
-		int const			&getExecGrade() const;
-		void				execute(Bureaucrat const & executor);
-		class GradeTooHighException: public std::exception
-		{
-			public:
-				virtual char const	*what() const throw();
-		};
-		class GradeTooLowException: public std::exception
-		{
-			public:
-				virtual char const	*what() const throw();
-		};
+		void				execute(Bureaucrat const & executor) const;
 };
 
 #endif

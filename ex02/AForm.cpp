@@ -18,13 +18,9 @@ AForm::AForm() : _name("Default"), _is_signed(false), _sign_grade(150), _exec_gr
 	std::cout << "AForm default constructor " << this->getName() << std::endl;
 }
 
-AForm::AForm(std::string const &name, int sign_grade, int exec_grade) : _name(name), _is_signed(false), _sign_grade(sign_grade), _exec_grade(exec_grade)
+AForm::AForm(std::string const &name) : _name(name), _is_signed(false), _sign_grade(150), _exec_grade(150)
 {
 	std::cout << "AForm assignment constructor " << this->getName() << std::endl;
-	if (this->_sign_grade < 1 || this->_exec_grade < 1)
-		throw (AForm::GradeTooHighException());
-	else if (this->_sign_grade > 150 || this->_exec_grade > 150)
-		throw (AForm::GradeTooLowException());
 }
 
 AForm::AForm(AForm const &src) : _name(src._name), _is_signed(false), _sign_grade(src._sign_grade), _exec_grade(src._exec_grade)
@@ -32,15 +28,26 @@ AForm::AForm(AForm const &src) : _name(src._name), _is_signed(false), _sign_grad
 	std::cout << "AForm copy constructor " << this->getName() << std::endl;
 }
 
+AForm::AForm(std::string const &name, std::string const &target)
+	: _name(name), _is_signed(false), _sign_grade(150), _exec_grade(150), _target(target)
+{
+	std::cout << "AForm constructor for " << name << " with target: " << target << std::endl;
+}
+
 AForm::~AForm()
 {
-	std::cout << "Bureaucrat destructor " << this->getName() << std::endl;
+	std::cout << "AForm destructor " << this->getName() << std::endl;
 }
 
 AForm const	&AForm::operator=(AForm const &src)
 {
 	if (this != &src)
-		this->_is_signed = src._is_signed;
+	{
+		this->setSignGrade(src.getSignGrade());
+		this->setExecGrade(src.getExecGrade());
+		this->setSigned(false);
+		this->setTarget(src.getTarget());
+	}
 	return (*this);
 }
 
@@ -63,6 +70,16 @@ char const *AForm::GradeTooLowException::what() const throw()
 	return "Grade is too low!";
 }
 
+char const *AForm::FormNotSignedException::what() const throw()
+{
+	return "Form is not signed";
+}
+
+char const *AForm::FileCreationException::what() const throw()
+{
+	return "Cannot create file";
+}
+
 std::string const	&AForm::getName() const
 {
 	return (this->_name);
@@ -78,9 +95,43 @@ int const			&AForm::getSignGrade() const
 	return (this->_sign_grade);
 }
 
+
 int const			&AForm::getExecGrade() const
 {
 	return (this->_exec_grade);	
+}
+
+std::string const &AForm::getTarget() const
+{
+	return this->_target;
+}
+
+void	AForm::setSigned(bool sign)
+{
+	this->_is_signed = sign;
+}
+
+void	AForm::setSignGrade(int grade)
+{
+	if (grade < 1)
+		throw AForm::GradeTooHighException();
+	if (grade > 150)
+		throw AForm::GradeTooLowException();
+	const_cast<int&>(this->_sign_grade) = grade;
+}
+
+void	AForm::setExecGrade(int grade)
+{
+	if (grade < 1)
+		throw AForm::GradeTooHighException();
+	if (grade > 150)
+		throw AForm::GradeTooLowException();
+	const_cast<int&>(this->_exec_grade) = grade;
+}
+
+void AForm::setTarget(std::string const &target)
+{
+	this->_target = target;
 }
 
 std::ostream &operator<<(std::ostream &str, AForm const &Aform)

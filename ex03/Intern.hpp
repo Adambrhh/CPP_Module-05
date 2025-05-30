@@ -6,7 +6,7 @@
 /*   By: abarahho <abarahho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:57:28 by abarahho          #+#    #+#             */
-/*   Updated: 2025/05/29 18:22:57 by abarahho         ###   ########.fr       */
+/*   Updated: 2025/05/30 13:56:41 by abarahho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class Intern
 		Intern();
 		Intern(Intern const &src);
 		~Intern();
-		Intern const	&operator=(Intern const &src);
+		Intern			&operator=(Intern const &src);
 		AForm			*makeForm(const std::string form, const std::string target);
 };
 

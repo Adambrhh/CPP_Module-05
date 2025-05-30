@@ -6,61 +6,43 @@
 /*   By: abarahho <abarahho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 11:41:10 by abarahho          #+#    #+#             */
-/*   Updated: 2025/05/28 15:20:24 by abarahho         ###   ########.fr       */
+/*   Updated: 2025/05/29 14:54:11 by abarahho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main()
 {
     try
     {
-        Form invalidForm("InvalidForm", 0, 50);
+        Bureaucrat gardener("Gardener", 137);
+        ShrubberyCreationForm shrub("garden");
+        std::cout << "\n=== Testing ShrubberyCreationForm ===\n" << std::endl;
+        gardener.signForm(shrub);
+        gardener.executeForm(shrub);
+        std::cout << "\n=== Testing RobotomyRequestForm ===\n" << std::endl;
+        Bureaucrat technician("Technician", 45);
+        RobotomyRequestForm robot("Human");
+        technician.signForm(robot);
+        technician.executeForm(robot);
+        technician.executeForm(robot);
+        std::cout << "\n=== Testing PresidentialPardonForm ===\n" << std::endl;
+        Bureaucrat president("President", 5);
+        PresidentialPardonForm pardon("Criminal");
+        president.signForm(pardon);
+        president.executeForm(pardon);
+        std::cout << "\n=== Testing Failure Cases ===\n" << std::endl;
+        Bureaucrat intern("Intern", 150);
+        intern.signForm(shrub);
+        intern.executeForm(robot);
     }
     catch (std::exception &e)
     {
-        std::cerr<< e.what() << std::endl;
-    }
-    try
-    {
-        Bureaucrat alain("Alain", 50);
-        Form validForm("ValidForm", 100, 50);
-        std::cout << alain << std::endl;
-        std::cout << validForm << std::endl;
-        alain.signForm(validForm);
-    }
-    catch (std::exception &e)
-    {
-        std::cerr << e.what() << std::endl;
-    }
-    try
-    {
-        Bureaucrat bernard("Bernard", 10);
-        Form importantForm("ImportantForm", 20, 10);
-        std::cout << bernard << std::endl;
-        std::cout << importantForm << std::endl;
-        bernard.signForm(importantForm);
-        std::cout << importantForm << std::endl;
-    }
-    catch (std::exception &e)
-    {
-        std::cerr << e.what() << std::endl;
-    }
-    try
-    {
-        Bureaucrat charles("Charles", 15);
-        Form criticalForm("CriticalForm", 10, 5);
-        std::cout << charles << std::endl;
-        std::cout << criticalForm << std::endl;
-        charles.gradeDown();
-        std::cout << charles << std::endl;
-        charles.signForm(criticalForm);
-    }
-    catch (std::exception &e)
-    {
-        std::cerr << e.what() << std::endl;
+        std::cerr << "Exception: " << e.what() << std::endl;
     }
     return (0);
 }

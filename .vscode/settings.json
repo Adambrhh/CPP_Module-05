@@ -63,6 +63,7 @@
 		"__hash_table": "cpp",
 		"__mutex_base": "cpp",
 		"__node_handle": "cpp",
-		"__tuple": "cpp"
+		"__tuple": "cpp",
+		"fstream": "cpp"
 	}
 }
